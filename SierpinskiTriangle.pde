@@ -1,23 +1,28 @@
+public int num;
 public void setup()
 {
-  size(50,50);
-  
+   size(700,700);
+   num = 1;
 }
 public void draw()
 {
-    sierpinski(10,40,20);
+  background(0);
+  sierpinski(50, 650, 600, num);
+  
 }
-public void mouseDragged()//optional
-{
-
+public void mouseClicked(){
+  if(mouseButton == LEFT){
+    num++;
+      if(num > 8)
+        num=1;
+  }
 }
-public void sierpinski(int x, int y, int len) 
-{
-  if(len <= 20){
-    triangle(x,y,30,10,40,40);
+public void sierpinski(int x, int y, int len, int size){
+  if(size < 2){
+    triangle(x, y, x + (len/2), y - len, x +len, y );
   }else{
-    sierpinksi(x,y,len/2);
-    sierpinksi(x+len/2,y+len/2,len/2);
-    sierpinksi(x+len/4, y+len/2,len/2);
+    sierpinski(x, y, len/2, size-1);
+    sierpinski(x + len/2, y , len/2, size-1);
+    sierpinski(x + len/4, y - len/2, len/2, size-1);
   }
 }
